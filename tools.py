@@ -681,7 +681,9 @@ def integration(filenames=[], magnets=[], titles=[], typeList='', folder='', sil
 
                 # Set-up the plugin
                 uri_string = quote_plus(uncodeName(magnets[cm]))
-                if settings.value["plugin"] == 'Pulsar':
+                if settings.value["plugin"] == 'Quasar':
+                    link = 'plugin://plugin.video.quasar/play?uri=%s' % uri_string
+                elif settings.value["plugin"] == 'Pulsar':
                     link = 'plugin://plugin.video.pulsar/play?uri=%s' % uri_string
                 elif settings.value["plugin"] == 'KmediaTorrent':
                     link = 'plugin://plugin.video.kmediatorrent/play/%s' % uri_string

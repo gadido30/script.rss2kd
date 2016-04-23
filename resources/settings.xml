@@ -5,7 +5,7 @@
         <setting label="Show Folder:" type="folder" id="showFolder" source="videos" option="writeable" default=""/>
         <setting label="Anime Folder:" type="folder" id="animeFolder" source="videos" option="writeable" default=""/>
         <setting label="Plugin to use:" type="labelenum" id="plugin"
-                 values="Pulsar|KmediaTorrent|XBMCtorrent|Torrenter|YATP"/>
+                 values="Quasar|Pulsar|KmediaTorrent|XBMCtorrent|Torrenter|YATP"/>
         <setting label="Overwrite Existent .strm Files:" type="bool" id="overwrite" default="false"/>
         <setting label="Accept All Duplicated Files:" type="bool" id="duplicated" default="false"/>
         <setting label="Notification Message" type="lsep"/>
