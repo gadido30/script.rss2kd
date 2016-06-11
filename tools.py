@@ -503,6 +503,12 @@ def __removeDirectory__(folder="", title=""):
 
 
 def normalize(name):
+    if isinstance(name, unicode):
+        return name.encode('utf-8', 'ignore')
+    return name
+
+
+def normalize2(name):
     from unicodedata import normalize
     import types
     if type(name) == types.StringType:
@@ -532,16 +538,29 @@ def safeName(value):  # Make the name directory and filename safe
     value = normalize(value)  # First normalization
     value = unquoteName(value)
     value = uncodeName(value)
-    value = normalize(value)  # Last normalization, because some unicode char could appear from the previous steps
-    value = value.lower().title()
+    value = normalize2(value)  # Last normalization, because some unicode char could appear from the previous steps
+    value = value.lower().title().replace('_', ' ')
+    # erase keyword
+    value = re.sub('^\[.*?\]', '', value)  # erase [HorribleSub] for ex.
     value = re.sub('- ([0-9][0-9][0-9][0-9]) ', ' \g<1>', value + " ")
     value = re.sub('- ([0-9]+) ', '- EP\g<1>', value + " ")
-    keys = {'"': ' ', '*': ' ', '/': ' ', ':': ' ', '<': ' ', '>': ' ', '?': ' ', '|': ' ',
+    if 'season' not in value.lower():
+        value = value.lower().replace(" episode ", " - EP")
+    # check for qualities
+    value = value.replace("1920x1080", "1080p")
+    value = value.replace("1280x720", "720p")
+    value = value.replace("853x480", "480p")
+    value = value.replace("848x480", "480p")
+    value = value.replace("704x480", "480p")
+    value = value.replace("640x480", "480p")
+    value = value.replace("microhd", " microhd")  # sometimes comes with the year
+    value = value.replace("dvdrip", " dvdrip")  # sometimes comes with the year
+    keys = {'"': ' ', '*': ' ', '/': ' ', ':': ' ', '<': ' ', '>': ' ', '?': ' ', '|': ' ', '~': ' ',
             "'": '', 'Of': 'of', 'De': 'de', '.': ' ', ')': ' ', '(': ' ', '[': ' ', ']': ' ', '-': ' '}
     for key in keys.keys():
         value = value.replace(key, keys[key])
     value = ' '.join(value.split())
-    return value.replace('S H I E L D', 'SHIELD')
+    return value.replace('s h i e l d', 'SHIELD').replace('c s i', 'CSI')
 
 
 def format_title(value=''):
