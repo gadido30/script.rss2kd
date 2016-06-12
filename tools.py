@@ -699,7 +699,7 @@ def integration(filenames=[], magnets=[], titles=[], typeList='', folder='', sil
                     pass
 
                 # Set-up the plugin
-                uri_string = quote_plus(uncodeName(magnets[cm]))
+                uri_string = quote_plus(normalize(uncodeName(magnets[cm])))
                 if settings.value["plugin"] == 'Quasar':
                     link = 'plugin://plugin.video.quasar/play?uri=%s' % uri_string
                 elif settings.value["plugin"] == 'Pulsar':
