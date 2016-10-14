@@ -6,6 +6,7 @@
 		<import addon="script.module.html5lib" optional="false"/>
 		<import addon="script.module.requests" optional="false"/>
 		<import addon="script.module.feedparser" optional="false"/>
+		 <!--<import addon="script.module.pydevd" version="4.4.0"/>-->
 	</requires>
 	<extension point="xbmc.python.script" library="main.py">
 		<provides>executable</provides>
